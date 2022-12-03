@@ -50,23 +50,22 @@ const Profile = () => {
         })
         .then((res) => {
           console.log(res);
+          setUser({ ...user, password: newPassword });
+          // setUser is ran AFTER the below line, so localStorage.setItem("user", JSON.stringify(user)) will not work.
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ ...user, password: newPassword })
+          );
+          setOldPassword("");
+          setNewPassword("");
+          setErrorMessage("Başarılı");
         });
-      setUser({ ...user, password: newPassword });
-      // setUser is ran AFTER the below line, so localStorage.setItem("user", JSON.stringify(user)) will not work.
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ ...user, password: newPassword })
-      );
-      setOldPassword("");
-      setNewPassword("");
-      setErrorMessage("Başarılı");
     }
   };
 
   useEffect(() => {
     if (!user.username) {
       // if the user state doesn't have a username, which means the user is not logged in
-      console.log("not logged in, redirecting to login...");
       navigate("/");
     }
   }, []);

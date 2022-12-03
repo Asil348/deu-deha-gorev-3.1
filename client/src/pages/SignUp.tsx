@@ -55,7 +55,6 @@ const SignUp = () => {
 
   useEffect(() => {
     if (user.username) {
-      console.log("already logged in, redirecting to profile...");
       navigate("/profile");
     }
   }, []);

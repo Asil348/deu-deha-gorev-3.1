@@ -22,7 +22,6 @@ const SignIn = () => {
     // if the username exists in local storage, which means the user has logged in before and didn't log out
     if (JSON.parse(localStorage.getItem("user") || "{}").username) {
       setUser(JSON.parse(localStorage.getItem("user") || "{}"));
-      console.log("found user in local storage, setting user...");
     }
 
     // if the user object has a username, either in local storage or in the state, redirect to profile
