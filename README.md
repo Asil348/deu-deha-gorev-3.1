@@ -6,14 +6,15 @@
 
 1. Projeyi klonlayın.
 2. mysql veritabanı oluşturun. Veritabanı konfigurasyonunu `.env` dosyasından tanımlayın. Tablo aşağıdaki gibi olmalıdır.
-  ```sql
-  CREATE TABLE `users` (
-    `id` int(11) NOT NULL,
-    `username` varchar(255) NOT NULL,
-    `email` varchar(255) NOT NULL,
-    `password` varchar(255) NOT NULL,
-  )
-  ```
+```sql
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+)
+```
 3. Sunucuları çalıştırın:
 
 ### Frontend sunucusu için:
