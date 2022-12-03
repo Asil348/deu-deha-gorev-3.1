@@ -29,6 +29,15 @@ const SignUp = () => {
           email: registeredEmail,
           password: registeredPassword,
         });
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            id: res.data[0].id,
+            username: registeredUsername,
+            email: registeredEmail,
+            password: registeredPassword,
+          })
+        );
         setErrorMessage("success");
         navigate("/profile");
       })
