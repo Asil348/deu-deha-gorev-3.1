@@ -24,6 +24,7 @@ const SignUp = () => {
       })
       .then((res) => {
         setUser({
+          id: res.data[0].id,
           username: registeredUsername,
           email: registeredEmail,
           password: registeredPassword,
