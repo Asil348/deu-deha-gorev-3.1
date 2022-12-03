@@ -12,7 +12,6 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* @ts-ignore */}
       <UserContext.Provider value={{user, setUser}}>
         <Routes>
           <Route path="/" element={<SignIn />} />
