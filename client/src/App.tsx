@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, Route, Routes } from "react-router-dom";
 import Profile from "./pages/Profile";
@@ -7,12 +7,16 @@ import SignUp from "./pages/SignUp";
 import { UserContext } from "./contexts/UserContext";
 
 const App = () => {
-
-  const [user, setUser] = useState({username: "", password: ""});
+  const [user, setUser] = useState<any>({
+    id: "",
+    username: "",
+    email: "",
+    password: "",
+  });
 
   return (
     <div className="App">
-      <UserContext.Provider value={{user, setUser}}>
+      <UserContext.Provider value={{ user, setUser }}>
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/profile" element={<Profile />} />
