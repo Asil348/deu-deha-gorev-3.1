@@ -4,11 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./index.css";
 import App from "./App";
-import Profile from "./pages/Profile";
-import SignUp from "./pages/SignUp";
 
-//@ts-ignore
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
