@@ -35,12 +35,12 @@ const Profile = () => {
       // if the old password and new password are the same
       setOldPassword("");
       setNewPassword("");
-      setErrorMessage("new password must be different from old password");
+      setErrorMessage("Yeni parola eskisiyle aynı olamaz.");
     } else if (oldPassword !== user.password) {
       // if the old password is not the same as the user's password
       setOldPassword("");
       setNewPassword("");
-      setErrorMessage("Incorrect old password");
+      setErrorMessage("Eski parola yanlış.");
     } else {
       // change password from both the user state and local storage
       axios
@@ -59,7 +59,7 @@ const Profile = () => {
       );
       setOldPassword("");
       setNewPassword("");
-      setErrorMessage("success");
+      setErrorMessage("Başarılı");
     }
   };
 
@@ -77,11 +77,11 @@ const Profile = () => {
         <>
           <Card style={{ width: "50em" }}>
             <Card.Body>
-              <Card.Title>Profile</Card.Title>
+              <Card.Title>Profil</Card.Title>
               <Form onSubmit={changePassword}>
                 <Form.Group as={Row} className="mb-3">
                   <Form.Label column sm="2">
-                    Username
+                    Kullanıcı adı
                   </Form.Label>
                   <Col sm="10">
                     <Form.Control
@@ -106,38 +106,40 @@ const Profile = () => {
 
                 <Form.Group as={Row} className="mb-3">
                   <Form.Label column sm="2">
-                    Password
+                    Parola
                   </Form.Label>
                   <Col sm="10">
                     <Form.Control
                       type="password"
                       onChange={(e) => setOldPassword(e.target.value)}
                       value={oldPassword}
-                      placeholder="Old password"
+                      placeholder="Eski parola"
                       className="mb-3"
+                      required
                     />
                     <Form.Control
                       type="password"
                       onChange={(e) => setNewPassword(e.target.value)}
                       value={newPassword}
-                      placeholder="New password"
+                      placeholder="Yeni parola"
+                      required
                     />
                   </Col>
                 </Form.Group>
                 <p className="text-center text-danger">{errorMessage}</p>
                 <Button className="w-100" variant="primary" type="submit">
-                  Submit
+                  Parola Değiştir
                 </Button>
               </Form>
               <hr />
               <Button className="w-100" variant="danger" onClick={logout}>
-                Logout
+                Çıkış yap
               </Button>
             </Card.Body>
           </Card>
         </>
       ) : (
-        <h1>Not logged in.</h1>
+        <h1>Giriş yapılmadı.</h1>
       )}
     </div>
   );

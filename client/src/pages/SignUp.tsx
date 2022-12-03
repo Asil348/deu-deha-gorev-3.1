@@ -64,13 +64,13 @@ const SignUp = () => {
     <div className="registration h-100 d-flex justify-content-center align-items-center">
       <Card className="p-4" style={{ width: "22em" }}>
         <Card.Body>
-          <Card.Title>Sign Up</Card.Title>
+          <Card.Title>Kayıt Ol</Card.Title>
           <Form onSubmit={register}>
-            <Form.Group className="mb-3" controlId="formBasicEUsername">
-              <Form.Label>Username</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label>Kullanıcı Adı</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter username"
+                placeholder="Kullanıcı adı"
                 required
                 value={registeredUsername}
                 onChange={(e) => {
@@ -78,7 +78,7 @@ const SignUp = () => {
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEUsername">
+            <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
@@ -90,11 +90,11 @@ const SignUp = () => {
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label>Parola</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Password"
+                placeholder="Parola"
                 required
                 value={registeredPassword}
                 onChange={(e) => {
@@ -103,15 +103,16 @@ const SignUp = () => {
               />
             </Form.Group>
             <Button className="w-100" variant="primary" type="submit">
-              Sign Up
+              Kayıt Ol
             </Button>
+            <hr />
             <Link to="/">
               <Button className="w-100 mt-3" variant="secondary">
-                Sign In
+                Giriş Yap
               </Button>
             </Link>
           </Form>
-          <p className="mt-3 text-center">{errorMessage}</p>
+          <p className="mt-3 text-center text-danger">{errorMessage}</p>
         </Card.Body>
       </Card>
     </div>

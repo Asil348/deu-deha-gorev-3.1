@@ -59,14 +59,14 @@ app.post("/register", (req, res) => {
         [username],
         (err, result) => {
           if (result.length > 0) {
-            res.status(409).send({ message: "Username already exists" });
+            res.status(409).send({ message: "Bu kullanıcı adı ile kayıt olunmuş." });
           } else {
             db.query(
               "SELECT * FROM users WHERE email = ?",
               [email],
               (err, result) => {
                 if (result.length > 0) {
-                  res.status(409).send({ message: "Email already exists" });
+                  res.status(409).send({ message: "Bu email ile kayıt olunmuş." });
                 } else {
                   db.query(
                     "INSERT INTO users (id, username, email, password) VALUES (?, ?, ?, ?)",
@@ -105,7 +105,7 @@ app.post("/login", (req, res) => {
       if (result.length > 0) {
         res.send(result);
       } else {
-        res.send({ message: "Wrong username/password combination!" });
+        res.send({ message: "Kullanıcı adı veya parola yanlış." });
       }
     }
   );

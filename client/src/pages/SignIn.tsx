@@ -65,7 +65,7 @@ const SignIn = () => {
               password: res.data[0].password,
             })
           );
-          setLoginStatus("success");
+          setLoginStatus("Başarılı");
           navigate("/profile");
         }
       });
@@ -76,24 +76,24 @@ const SignIn = () => {
       <div className="login h-100 d-flex justify-content-center align-items-center">
         <Card className="p-4" style={{ width: "22em" }}>
           <Card.Body>
-            <Card.Title>Sign In</Card.Title>
+            <Card.Title>Giriş Yap</Card.Title>
             <Form onSubmit={login}>
-              <Form.Group className="mb-3" controlId="formBasicEUsername">
-                <Form.Label>Username</Form.Label>
+              <Form.Group className="mb-3">
+                <Form.Label>Kullanıcı Adı</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter username"
+                  placeholder="Kullanıcı adı"
                   required
                   onChange={(e) => {
                     setUsername(e.target.value);
                   }}
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+              <Form.Group className="mb-3">
+                <Form.Label>Parola</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Password"
+                  placeholder="Parola"
                   required
                   onChange={(e) => {
                     setPassword(e.target.value);
@@ -101,16 +101,16 @@ const SignIn = () => {
                 />
               </Form.Group>
               <Button className="w-100" variant="primary" type="submit">
-                Sign in
+                Giriş Yap
               </Button>
             </Form>
+            <hr />
             <Link to="/signup">
               <Button className="w-100 mt-3" variant="secondary">
-                Sign Up
+                Kayıt Ol
               </Button>
             </Link>
             <p className="mt-3 text-center text-danger">{loginStatus}</p>
-            <h1>{user.username}</h1>
           </Card.Body>
         </Card>
       </div>
