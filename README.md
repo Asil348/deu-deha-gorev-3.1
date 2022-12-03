@@ -5,8 +5,16 @@
 ---
 
 1. Projeyi klonlayın.
-1. mysql veritabanı oluşturun. Veritabanı konfigurasyonunu `server/index.js` dosyasından tanımlayın.
-1. Sunucuları çalıştırın:
+2. mysql veritabanı oluşturun. Veritabanı konfigurasyonunu `.env` dosyasından tanımlayın. Tablo aşağıdaki gibi olmalıdır.
+  ```sql
+  CREATE TABLE `users` (
+    `id` int(11) NOT NULL,
+    `username` varchar(255) NOT NULL,
+    `email` varchar(255) NOT NULL,
+    `password` varchar(255) NOT NULL,
+  )
+  ```
+3. Sunucuları çalıştırın:
 
 ### Frontend sunucusu için:
 ```
