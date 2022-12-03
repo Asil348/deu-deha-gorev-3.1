@@ -12,6 +12,7 @@ const Profile = () => {
   const [newPassword, setNewPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // basic logout function, set the user state to empty, and empty the user object from local storage, then redirect to the index route
   const logout = () => {
     setUser({ id: "", username: "", email: "", password: "" });
     localStorage.setItem(
@@ -25,14 +26,17 @@ const Profile = () => {
     e.preventDefault();
 
     if (oldPassword === newPassword) {
+      // if the old password and new password are the same
       setOldPassword("");
       setNewPassword("");
       setErrorMessage("new password must be different from old password");
     } else if (oldPassword !== user.password) {
+      // if the old password is not the same as the user's password
       setOldPassword("");
       setNewPassword("");
       setErrorMessage("Incorrect old password");
     } else {
+      // change password from both the user state and local storage
       axios
         .post("http://localhost:1337/change-password", {
           id: user.id,
@@ -42,6 +46,7 @@ const Profile = () => {
           console.log(res);
         });
       setUser({ ...user, password: newPassword });
+      // setUser is ran AFTER the below line, so localStorage.setItem("user", JSON.stringify(user)) will not work.
       localStorage.setItem(
         "user",
         JSON.stringify({ ...user, password: newPassword })
@@ -53,7 +58,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (!user.username) {
+    if (!user.username) { // if the user state doesn't have a username, which means the user is not logged in
       console.log("not logged in, redirecting to login...");
       navigate("/");
     }

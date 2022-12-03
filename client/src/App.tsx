@@ -12,11 +12,11 @@ const App = () => {
     username: "",
     email: "",
     password: "",
-  });
+  }); // set the user object as empty on first render
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{ user, setUser }}> {/* pass the user state as context */}
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/profile" element={<Profile />} />

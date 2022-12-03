@@ -5,8 +5,9 @@ import cors from "cors";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors()); // to avoid cors errors
 
+// create connection to database
 const db = mysql.createConnection({
   user: "admin",
   host: "localhost",
@@ -14,6 +15,7 @@ const db = mysql.createConnection({
   database: "deha",
 });
 
+// This is for setting the user id on frontend, see client/src/pages/SignUp.tsx
 app.get("/get-length", (req, res) => {
   db.query(`SELECT COUNT(*) as count FROM users`, (err, result) => {
     if (err) {
@@ -45,6 +47,7 @@ app.post("/register", (req, res) => {
   const password = req.body.password;
   const email = req.body.email;
 
+  // this is very nested, which is not good practice. will fix later.
   db.query(`SELECT COUNT(*) as count FROM users`, (err, result) => {
     if (err) {
       console.log(err);
@@ -98,6 +101,7 @@ app.post("/login", (req, res) => {
         res.send({ err: err });
       }
 
+      // if query returns nothing, then user does not exist
       if (result.length > 0) {
         res.send(result);
       } else {
