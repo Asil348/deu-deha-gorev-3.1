@@ -24,6 +24,21 @@ app.get("/get-length", (req, res) => {
   });
 });
 
+app.post("/change-password", (req, res) => {
+  const { id, password } = req.body;
+  db.query(
+    `UPDATE users SET password = ? WHERE id = ?`,
+    [password, id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 app.post("/register", (req, res) => {
   let id;
   const username = req.body.username;
@@ -37,13 +52,33 @@ app.post("/register", (req, res) => {
     } else {
       id = result[0].count;
       db.query(
-        "INSERT INTO users (id, username, email, password) VALUES (?, ?, ?, ?)",
-        [id, username, email, password],
+        "SELECT * FROM users WHERE username = ?",
+        [username],
         (err, result) => {
-          if (err) {
-            console.log(err);
+          if (result.length > 0) {
+            res.status(409).send({ message: "Username already exists" });
           } else {
-            res.send("Values Inserted");
+            db.query(
+              "SELECT * FROM users WHERE email = ?",
+              [email],
+              (err, result) => {
+                if (result.length > 0) {
+                  res.status(409).send({ message: "Email already exists" });
+                } else {
+                  db.query(
+                    "INSERT INTO users (id, username, email, password) VALUES (?, ?, ?, ?)",
+                    [id, username, email, password],
+                    (err, result) => {
+                      if (err) {
+                        console.log(err);
+                      } else {
+                        res.send("Values Inserted");
+                      }
+                    }
+                  );
+                }
+              }
+            );
           }
         }
       );

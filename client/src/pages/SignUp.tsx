@@ -7,13 +7,13 @@ const SignUp = () => {
   const [registeredUsername, setRegisteredUsername] = useState("");
   const [registeredPassword, setRegisteredPassword] = useState("");
   const [registeredEmail, setRegisteredEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { user, setUser }: any = useContext(UserContext);
 
   const navigate = useNavigate();
 
   const register = (e: any) => {
-
     e.preventDefault();
 
     axios
@@ -29,6 +29,12 @@ const SignUp = () => {
           password: registeredPassword,
         });
         navigate("/profile");
+      })
+      .catch((err) => {
+        setErrorMessage(err.response.data.message);
+        setRegisteredUsername("");
+        setRegisteredEmail("");
+        setRegisteredPassword("");
       });
   };
 
@@ -46,6 +52,7 @@ const SignUp = () => {
         <label>Username</label>
         <input
           type="text"
+          value={registeredUsername}
           onChange={(e) => {
             setRegisteredUsername(e.target.value);
           }}
@@ -53,6 +60,7 @@ const SignUp = () => {
         <label>Email</label>
         <input
           type="email"
+          value={registeredEmail}
           onChange={(e) => {
             setRegisteredEmail(e.target.value);
           }}
@@ -60,11 +68,13 @@ const SignUp = () => {
         <label>Password</label>
         <input
           type="password"
+          value={registeredPassword}
           onChange={(e) => {
             setRegisteredPassword(e.target.value);
           }}
         />
         <button type="submit">Register</button>
+        <p>{errorMessage}</p>
       </form>
     </div>
   );
