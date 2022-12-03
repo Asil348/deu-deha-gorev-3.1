@@ -29,6 +29,7 @@ const SignUp = () => {
           email: registeredEmail,
           password: registeredPassword,
         });
+        setErrorMessage("success");
         navigate("/profile");
       })
       .catch((err) => {

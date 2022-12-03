@@ -6,15 +6,18 @@ import axios from "axios";
 
 const Profile = () => {
   const { user, setUser }: any = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const navigate = useNavigate();
-
   const logout = () => {
     setUser({ id: "", username: "", email: "", password: "" });
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ id: "", username: "", email: "", password: "" })
+    );
     navigate("/");
   };
 
@@ -39,6 +42,10 @@ const Profile = () => {
           console.log(res);
         });
       setUser({ ...user, password: newPassword });
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...user, password: newPassword })
+      );
       setOldPassword("");
       setNewPassword("");
       setErrorMessage("success");

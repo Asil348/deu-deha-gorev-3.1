@@ -6,16 +6,21 @@ import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const { user, setUser }: any = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const [loginStatus, setLoginStatus] = useState("");
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("user") || "{}").username) {
+      setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+      console.log("found user in local storage, setting user...");
+    }
+
+  }, []);
 
   const login = (e: any) => {
-
     e.preventDefault();
 
     axios
@@ -23,24 +28,25 @@ const SignIn = () => {
         username: username,
         password: password,
       })
-      .then((res) => {
+      .then(async (res) => {
         if (res.data.message) {
           setLoginStatus(res.data.message);
         } else {
-          setLoginStatus("success");
           setUser({
             id: res.data[0].id,
             username: res.data[0].username,
             email: res.data[0].email,
             password: res.data[0].password,
           });
+          localStorage.setItem("user", JSON.stringify({id: res.data[0].id, username: res.data[0].username, email: res.data[0].email, password: res.data[0].password}));
+          setLoginStatus("success");
           navigate("/profile");
         }
       });
   };
 
   useEffect(() => {
-    if (user.username) {
+    if (user.username || JSON.parse(localStorage.getItem("user") || "{}").username) {
       console.log("already logged in, redirecting to profile...");
       navigate("/profile");
     }
