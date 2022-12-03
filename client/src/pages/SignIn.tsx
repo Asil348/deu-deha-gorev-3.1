@@ -4,6 +4,10 @@ import { UserContext } from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+
 // !! This is the index route !! //
 
 const SignIn = () => {
@@ -40,7 +44,8 @@ const SignIn = () => {
         password: password,
       })
       .then((res) => {
-        if (res.data.message) { // if the server returns a message, which means there is a problem
+        if (res.data.message) {
+          // if the server returns a message, which means there is a problem
           setLoginStatus(res.data.message);
         } else {
           setUser({
@@ -68,30 +73,47 @@ const SignIn = () => {
 
   return (
     <>
-      <Link to="/profile">Profile</Link>
-      <Link to="/signup">Sign Up</Link>
-      <div className="login">
-        <form onSubmit={login}>
-          <h1>Login</h1>
-          <label>Username</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-          <label>Password</label>
-          <input
-            type="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <button type="submit">Login</button>
-        </form>
+      <div className="login h-100 d-flex justify-content-center align-items-center">
+        <Card className="p-4" style={{ width: "22em" }}>
+          <Card.Body>
+            <Card.Title>Sign In</Card.Title>
+            <Form onSubmit={login}>
+              <Form.Group className="mb-3" controlId="formBasicEUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter username"
+                  required
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  required
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+              </Form.Group>
+              <Button className="w-100" variant="primary" type="submit">
+                Sign in
+              </Button>
+            </Form>
+            <Link to="/signup">
+              <Button className="w-100 mt-3" variant="secondary">
+                Sign Up
+              </Button>
+            </Link>
+            <p className="mt-3 text-center text-danger">{loginStatus}</p>
+            <h1>{user.username}</h1>
+          </Card.Body>
+        </Card>
       </div>
-      <h1>{loginStatus}</h1>
-      <h1>{user.username}</h1>
     </>
   );
 };

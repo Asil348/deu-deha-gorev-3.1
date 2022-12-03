@@ -4,6 +4,12 @@ import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+
 const Profile = () => {
   const { user, setUser }: any = useContext(UserContext);
   const navigate = useNavigate();
@@ -58,46 +64,82 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (!user.username) { // if the user state doesn't have a username, which means the user is not logged in
+    if (!user.username) {
+      // if the user state doesn't have a username, which means the user is not logged in
       console.log("not logged in, redirecting to login...");
       navigate("/");
     }
   }, []);
 
   return (
-    <>
-      <Link to="/">sign in</Link>
-      <Link to="/signup">Sign Up</Link>
-      <div>
-        Profile
-        {user.username ? (
-          <>
-            <h1>Username: {user.username}</h1>
-            <h1>Email: {user.email}</h1>
-            <form onSubmit={changePassword}>
-              <label>Change Password </label>
-              <input
-                type="password"
-                onChange={(e) => setOldPassword(e.target.value)}
-                value={oldPassword}
-                placeholder="Old password"
-              />
-              <input
-                type="password"
-                onChange={(e) => setNewPassword(e.target.value)}
-                value={newPassword}
-                placeholder="New password"
-              />
-              <input type="submit" value="Değiştir" />
-              <p>{errorMessage}</p>
-            </form>
-            <input type="button" value="Logout" onClick={logout} />
-          </>
-        ) : (
-          <h1>Not logged in.</h1>
-        )}
-      </div>
-    </>
+    <div className="profile h-100 d-flex justify-content-center align-items-center">
+      {user.username ? (
+        <>
+          <Card style={{ width: "50em" }}>
+            <Card.Body>
+              <Card.Title>Profile</Card.Title>
+              <Form onSubmit={changePassword}>
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Username
+                  </Form.Label>
+                  <Col sm="10">
+                    <Form.Control
+                      plaintext
+                      readOnly
+                      defaultValue={user.username}
+                    />
+                  </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Email
+                  </Form.Label>
+                  <Col sm="10">
+                    <Form.Control
+                      plaintext
+                      readOnly
+                      defaultValue={user.email}
+                    />
+                  </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Password
+                  </Form.Label>
+                  <Col sm="10">
+                    <Form.Control
+                      type="password"
+                      onChange={(e) => setOldPassword(e.target.value)}
+                      value={oldPassword}
+                      placeholder="Old password"
+                      className="mb-3"
+                    />
+                    <Form.Control
+                      type="password"
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      value={newPassword}
+                      placeholder="New password"
+                    />
+                  </Col>
+                </Form.Group>
+                <p className="text-center text-danger">{errorMessage}</p>
+                <Button className="w-100" variant="primary" type="submit">
+                  Submit
+                </Button>
+              </Form>
+              <hr />
+              <Button className="w-100" variant="danger" onClick={logout}>
+                Logout
+              </Button>
+            </Card.Body>
+          </Card>
+        </>
+      ) : (
+        <h1>Not logged in.</h1>
+      )}
+    </div>
   );
 };
 

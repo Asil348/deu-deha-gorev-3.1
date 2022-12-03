@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Link, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import { UserContext } from "./contexts/UserContext";
+
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import { UserContext } from "./contexts/UserContext";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const App = () => {
   const [user, setUser] = useState<any>({

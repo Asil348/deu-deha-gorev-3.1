@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const SignUp = () => {
   const [registeredUsername, setRegisteredUsername] = useState("");
@@ -57,36 +61,59 @@ const SignUp = () => {
   }, []);
 
   return (
-    <div className="registration">
-      <h1>Registration</h1>
-      <form onSubmit={register}>
-        <label>Username</label>
-        <input
-          type="text"
-          value={registeredUsername}
-          onChange={(e) => {
-            setRegisteredUsername(e.target.value);
-          }}
-        />
-        <label>Email</label>
-        <input
-          type="email"
-          value={registeredEmail}
-          onChange={(e) => {
-            setRegisteredEmail(e.target.value);
-          }}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          value={registeredPassword}
-          onChange={(e) => {
-            setRegisteredPassword(e.target.value);
-          }}
-        />
-        <button type="submit">Register</button>
-        <p>{errorMessage}</p>
-      </form>
+    <div className="registration h-100 d-flex justify-content-center align-items-center">
+      <Card className="p-4" style={{ width: "22em" }}>
+        <Card.Body>
+          <Card.Title>Sign Up</Card.Title>
+          <Form onSubmit={register}>
+            <Form.Group className="mb-3" controlId="formBasicEUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter username"
+                required
+                value={registeredUsername}
+                onChange={(e) => {
+                  setRegisteredUsername(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEUsername">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                required
+                value={registeredEmail}
+                onChange={(e) => {
+                  setRegisteredEmail(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                required
+                value={registeredPassword}
+                onChange={(e) => {
+                  setRegisteredPassword(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Button className="w-100" variant="primary" type="submit">
+              Sign Up
+            </Button>
+            <Link to="/">
+              <Button className="w-100 mt-3" variant="secondary">
+                Sign In
+              </Button>
+            </Link>
+          </Form>
+          <p className="mt-3 text-center">{errorMessage}</p>
+        </Card.Body>
+      </Card>
     </div>
   );
 };
