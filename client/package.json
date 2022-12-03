@@ -1,0 +1,32 @@
+{
+  "name": "deu-deha-gorev-3-client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@types/localforage": "^0.0.34",
+    "@types/match-sorter": "^6.0.0",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/sort-by": "^1.2.0",
+    "axios": "^1.2.0",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.4",
+    "sort-by": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@vitejs/plugin-react": "^2.2.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.2.3"
+  }
+}
