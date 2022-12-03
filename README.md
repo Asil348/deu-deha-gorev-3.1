@@ -43,3 +43,6 @@ Kullanıcıyı giriş sayfası karşılar. Yukarıda profil linki de bulunur, fa
 
 # ÖNEMLİ
 Kullanıcı bilgiler **KESİNLİKLE ASLA** localStorage'da tutulmamalıdır. Bu localStorage injection'a yol açabilir. Kullanıcı bilgileri **SADECE** server tarafında tutulmalıdır. localStorage'da sadece kullanıcıya ait bir token tutulmalıdır. Bu token ile server tarafında kullanıcı bilgileri çekilmelidir. Bunun için JWT kullanılabilir. Bu projede kolaylık ve gösterim amacından dolayı kullanıcı bilgileri ilk loginden sonra, logout yapılmadığı sürece, localStorage'da tutulmaktadır.
+
+### Not:
+Bu uygulamada şu özellikler bulunmamaktadır: parola şifreleme, kullanıcı şifreleme, geliştirilmiş kullanıcı id'si oluşturma 
