@@ -1,6 +1,15 @@
 import express from "express";
 import mysql from "mysql";
 import cors from "cors";
+import * as dotenv from 'dotenv';
+
+const workDir = process.cwd();
+dotenv.config({ path: `${workDir}/.env` });
+
+const DB_HOST = process.env.DB_HOST;
+const DB_USER = process.env.DB_USER;
+const DB_PASS = process.env.DB_PASS;
+const DB_NAME = process.env.DB_NAME;
 
 const app = express();
 
@@ -9,10 +18,10 @@ app.use(cors()); // to avoid cors errors
 
 // create connection to database
 const db = mysql.createConnection({
-  user: "admin",
-  host: "localhost",
-  password: "PassWord!",
-  database: "deha",
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASS,
+  database: DB_NAME,
 });
 
 // This is for setting the user id on frontend, see client/src/pages/SignUp.tsx
